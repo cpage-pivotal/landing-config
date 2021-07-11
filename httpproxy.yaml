@@ -1,0 +1,15 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: landing
+  namespace: e2e-workshop-ui
+spec:
+  virtualhost:
+    fqdn: landing.tools.pez.aws.grogscave.net
+    tls:
+      secretName: eduk8s/eduk8s-cert-tls
+  routes:
+    - services:
+        - name: landing
+          port: 80
+          
