@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: landing
+  labels:
+    app: landing
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: landing
+      labels:
+        app: landing
+    spec:
+      containers:
+        - name: landing
+          image: harbor.tools.pez.aws.grogscave.net/tanzu-e2e/landing-ui:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: landing-config
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: landing
+      
